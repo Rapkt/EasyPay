@@ -39,8 +39,7 @@
           [class.text-[#0B6B5B]]="rlaDashboard.isActive"
           [class.text-[#0F2A24]/60]="!rlaDashboard.isActive"
         >
-        My requests
-        </a>
+        {{ lang.t('shell.myRequests') }}</a>
 
         <a
           routerLink="/checkout"
@@ -51,13 +50,12 @@
           [class.text-[#0B6B5B]]="rlaCheckout.isActive"
           [class.text-[#0F2A24]/60]="!rlaCheckout.isActive"
         >
-        New payment
-        </a>
+        {{ lang.t('shell.newPayment') }}</a>
       </div>
 
       <div class="flex shrink-0 items-center gap-3">
         <div class="hidden text-right sm:block">
-          <p class="text-[10px] uppercase tracking-wide text-[#0F2A24]/40">Signed in as</p>
+          <p class="text-[10px] uppercase tracking-wide text-[#0F2A24]/40">{{ lang.t('shell.signedInAs') }}</p>
           <p class="text-sm font-semibold leading-tight">EasyPay User</p>
         </div>
         <span
@@ -74,7 +72,7 @@
   </main>
 
   <footer class="mx-auto max-w-6xl px-4 pb-8 pt-2 text-center text-xs text-[#0F2A24]/40">
-    EasyPay demo · Pay USD bills with EGP
+    {{ lang.t('shell.footer') }}
   </footer>
 
   <div

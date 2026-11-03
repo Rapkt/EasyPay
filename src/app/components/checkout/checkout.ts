@@ -5,6 +5,7 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { TransactionService } from '../../services/transaction.service';
 import { ToastService } from '../../services/toast.service';
+import { LanguageService } from '../../services/language.service';
 
 @Component({
   imports: [ReactiveFormsModule, DecimalPipe],
@@ -17,6 +18,7 @@ export class CheckoutComponent {
   private toast = inject(ToastService);
   private router = inject(Router);
   private fb = inject(FormBuilder);
+  lang = inject(LanguageService);
 
   step = signal<'form' | 'pay'>('form');
   loading = signal(false);

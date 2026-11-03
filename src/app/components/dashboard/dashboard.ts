@@ -5,6 +5,7 @@ import { TransactionService } from '../../services/transaction.service';
 import { ToastService } from '../../services/toast.service';
 import { TransactionStatus, VirtualCard } from '../../models/transaction.model';
 import { VirtualCardComponent } from '../virtual-card/virtual-card';
+import {LanguageService} from '../../services/language.service';
 
 @Component({
   imports: [DatePipe, DecimalPipe, RouterLink, VirtualCardComponent],
@@ -15,6 +16,7 @@ import { VirtualCardComponent } from '../virtual-card/virtual-card';
 export class DashboardComponent {
   private tx = inject(TransactionService);
   private toast = inject(ToastService);
+  lang = inject(LanguageService);
 
   newestFirst = signal(true);
   approvingId = signal<string | null>(null);
