@@ -3,8 +3,10 @@
 html {
   scroll-behavior: smooth;
 }
-button{
-  cursor: pointer;
+@layer base {
+  button:not(:disabled) {
+    cursor: pointer;
+  }
 }
 body {
   min-height: 100vh;

@@ -1,5 +1,5 @@
 <div class="min-h-screen text-[#0F2A24]">
-  <header class="sticky top-0 z-30 border-b border-[#0F2A24]/10 bg-white/80 backdrop-blur">
+  <header class="sticky hidden sm:flex top-0 z-30 border-b border-[#0F2A24]/10 bg-white/80 backdrop-blur">
     <nav class="mx-auto flex items-center justify-between gap-3 px-4 py-3">
       <a routerLink="/dashboard" class="flex shrink-0 items-center gap-2.5 text-lg font-bold">
         <span
@@ -21,7 +21,7 @@
         <span>EasyPay</span>
       </a>
 
-      <div class="relative flex shrink-0 items-center rounded-full bg-[#0F2A24]/5 p-1 text-sm font-medium">
+      <div class="relative hidden sm:flex  shrink-0 items-center rounded-full bg-[#0F2A24]/5 p-1 text-sm font-medium">
         <!-- Sliding background pill -->
         <div
           class="absolute bottom-1 left-1 top-1 w-[calc(50%-4px)] rounded-full bg-white shadow-sm ring-1 ring-black/5 transition-transform duration-200 ease-out"
@@ -37,9 +37,10 @@
           [routerLinkActiveOptions]="{ exact: true }"
           class="relative z-10 flex-1 whitespace-nowrap rounded-full px-3 py-2 text-center transition-colors duration-300 active:scale-95 sm:px-4"
           [class.text-[#0B6B5B]]="rlaDashboard.isActive"
-          [class.text-[#0F2A24]/60]="!rlaDashboard.isActive"
+          [class.text-[#0F2A24]]="!rlaDashboard.isActive"
         >
-        {{ lang.t('shell.myRequests') }}</a>
+        {{ lang.t('shell.myRequests') }}
+        </a>
 
         <a
           routerLink="/checkout"
@@ -48,7 +49,7 @@
           [routerLinkActiveOptions]="{ exact: true }"
           class="relative z-10 flex-1 whitespace-nowrap rounded-full px-3 py-2 text-center transition-colors duration-300 active:scale-95 sm:px-4"
           [class.text-[#0B6B5B]]="rlaCheckout.isActive"
-          [class.text-[#0F2A24]/60]="!rlaCheckout.isActive"
+          [class.text-[#0F2A24]]="!rlaCheckout.isActive"
         >
         {{ lang.t('shell.newPayment') }}</a>
       </div>
@@ -66,15 +67,68 @@
       </div>
     </nav>
   </header>
-
-  <main class="page-content mx-auto max-w-6xl px-4 py-6 sm:py-8">
+<header class="sm:hidden">
+  <nav class="mx-auto flex items-center justify-center gap-3 pt-2 ">
+    <a routerLink="/dashboard" class="flex shrink-0 items-center gap-2.5 text-lg font-bold">
+        <span
+          class="grid h-9 w-9 place-items-center rounded-xl bg-gradient-to-br from-[#0B6B5B] to-[#0F2A24] text-white shadow-sm"
+        >
+          <svg class="h-4 w-4" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+            <rect
+              x="2.5"
+              y="5"
+              width="15"
+              height="10"
+              rx="2.5"
+              stroke="currentColor"
+              stroke-width="1.6"
+            />
+            <path d="M2.5 8.5h15" stroke="currentColor" stroke-width="1.6" />
+          </svg>
+        </span>
+      <span>EasyPay</span>
+    </a>
+  </nav>
+</header>
+  <main class="page-content mx-auto max-w-6xl px-4 py-6 pb-20 sm:py-8 sm:pb-8">
     <router-outlet />
   </main>
 
   <footer class="mx-auto max-w-6xl px-4 pb-8 pt-2 text-center text-xs text-[#0F2A24]/40">
     {{ lang.t('shell.footer') }}
   </footer>
+  <nav class="fixed bottom-0 left-0 right-0 z-30 flex items-center justify-around border-t
+    border-[#0F2A24]/10 bg-white/90 px-4 py-2 backdrop-blur sm:hidden">
+    <a
+      routerLink="/dashboard"
+      routerLinkActive="text-[#0B6B5B] font-semibold"
+      [routerLinkActiveOptions]="{ exact: true }"
+      class="flex flex-col items-center gap-1 text-xs text-[#0F2A24]/60 transition"
+    >
+      <!-- Dashboard / Requests Icon -->
+      <svg class="h-5 w-5" viewBox="0 0 20 20" fill="none" stroke="currentColor"
+           stroke-width="1.8">
+        <path d="M5 3h10a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1Z" />
+        <path d="M7 7h6M7 10h6M7 13h4" stroke-linecap="round" />
+      </svg>
+      <span>{{ lang.t('shell.myRequests') }}</span>
+    </a>
 
+    <a
+      routerLink="/checkout"
+      routerLinkActive="text-[#0B6B5B] font-semibold"
+      [routerLinkActiveOptions]="{ exact: true }"
+      class="flex flex-col items-center gap-1 text-xs text-[#0F2A24]/60 transition"
+    >
+      <!-- Checkout / Plus Icon -->
+      <svg class="h-5 w-5" viewBox="0 0 20 20" fill="none" stroke="currentColor"
+           stroke-width="1.8">
+        <circle cx="10" cy="10" r="7" />
+        <path d="M10 7v6M7 10h6" stroke-linecap="round" />
+      </svg>
+      <span>{{ lang.t('shell.newPayment') }}</span>
+    </a>
+  </nav>
   <div
     class="fixed bottom-4 right-4 z-50 flex w-[calc(100%-2rem)] max-w-sm flex-col gap-2"
     aria-live="polite"

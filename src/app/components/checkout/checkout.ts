@@ -39,8 +39,12 @@ export class CheckoutComponent {
   private value = toSignal(this.form.valueChanges, {
     initialValue: this.form.getRawValue(),
   });
+  private status = toSignal(this.form.statusChanges, {
+    initialValue: this.form.status,
+  });
   usd = computed(() => Number(this.value().amount) || 0);
   quote = computed(() => this.tx.quote(this.usd()));
+  invalid = computed(() => this.status() === 'INVALID');
 
   showError(name: 'service' | 'amount') {
     const c = this.form.controls[name];

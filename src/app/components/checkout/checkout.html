@@ -13,7 +13,9 @@
           <span class="h-1.5 w-1.5 rounded-full bg-[#0B6B5B]"></span>
           {{ lang.t('checkout.badge') }}
         </span>
-        <h1 class="mt-3 text-3xl font-bold tracking-tight sm:text-4xl">{{ lang.t('checkout.title') }}</h1>
+        <h1 class="mt-3 text-3xl font-bold tracking-tight sm:text-4xl">
+          {{ lang.t('checkout.title') }}
+        </h1>
         <p class="mt-2 max-w-md text-sm text-[#0F2A24]/70">
           {{ lang.t('checkout.subtitle') }}
         </p>
@@ -21,12 +23,12 @@
           <span class="rounded-full bg-white px-3 py-1.5 text-[#0F2A24]/60 shadow-sm"
             >1 USD = {{ tx.rate }} EGP</span
           >
-          <span class="rounded-full bg-white px-3 py-1.5 text-[#0F2A24]/60 shadow-sm"
-            >{{ lang.t('checkout.feeLabel', { fee: tx.feePercent }) }}</span
-          >
-          <span class="rounded-full bg-white px-3 py-1.5 text-[#0F2A24]/60 shadow-sm"
-            >{{ lang.t('checkout.cardInMinutes') }}</span
-          >
+          <span class="rounded-full bg-white px-3 py-1.5 text-[#0F2A24]/60 shadow-sm">{{
+            lang.t('checkout.feeLabel', { fee: tx.feePercent })
+          }}</span>
+          <span class="rounded-full bg-white px-3 py-1.5 text-[#0F2A24]/60 shadow-sm">{{
+            lang.t('checkout.cardInMinutes')
+          }}</span>
         </div>
       </div>
       <img
@@ -82,7 +84,9 @@
       @if (step() === 'form') {
         <form [formGroup]="form" (ngSubmit)="next()" class="space-y-5">
           <div>
-            <label for="service" class="mb-1.5 block text-sm font-semibold">{{ lang.t('checkout.serviceLabel') }}</label>
+            <label for="service" class="mb-1.5 block text-sm font-semibold">{{
+              lang.t('checkout.serviceLabel')
+            }}</label>
             <select
               id="service"
               formControlName="service"
@@ -101,7 +105,9 @@
           </div>
 
           <div>
-            <label for="amount" class="mb-1.5 block text-sm font-semibold">{{ lang.t('checkout.amountLabel') }}</label>
+            <label for="amount" class="mb-1.5 block text-sm font-semibold">{{
+              lang.t('checkout.amountLabel')
+            }}</label>
             <div class="relative">
               <span
                 class="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-sm font-semibold text-[#0F2A24]/40"
@@ -132,7 +138,9 @@
               <dd class="font-medium">{{ quote().base | number: '1.0-0' }} EGP</dd>
             </div>
             <div class="flex justify-between">
-              <dt class="text-[#0F2A24]/60">{{ lang.t('checkout.serviceFee', { fee: tx.feePercent }) }}</dt>
+              <dt class="text-[#0F2A24]/60">
+                {{ lang.t('checkout.serviceFee', { fee: tx.feePercent }) }}
+              </dt>
               <dd class="font-medium">{{ quote().fee | number: '1.0-0' }} EGP</dd>
             </div>
             <div
@@ -145,7 +153,8 @@
 
           <button
             type="submit"
-            class="w-full rounded-xl bg-[#0B6B5B] py-3 font-semibold text-white shadow-sm transition hover:bg-[#095647] hover:shadow-md"
+            [disabled]="invalid()"
+            class="w-full rounded-xl bg-[#0B6B5B] py-3 font-semibold text-white shadow-sm transition hover:bg-[#095647] hover:shadow-md disabled:bg-gray-300 disabled:text-gray-500 disabled:shadow-none disabled:cursor-not-allowed disabled:hover:bg-gray-300 disabled:hover:shadow-none"
           >
             {{ lang.t('checkout.continuebtn') }}
           </button>
@@ -155,7 +164,9 @@
           <div class="rounded-2xl bg-[#F4F7F5] p-4 text-sm">
             <p class="text-[#0F2A24]/60">{{ lang.t('checkout.sendExactly') }}</p>
             <p class="text-2xl font-bold">{{ quote().total | number: '1.0-0' }} EGP</p>
-            <p class="mt-1 text-[#0F2A24]/60">{{ lang.t('checkout.forService', { service: form.value.service ?? '', usd: usd() }) }}</p>
+            <p class="mt-1 text-[#0F2A24]/60">
+              {{ lang.t('checkout.forService', { service: form.value.service ?? '', usd: usd() }) }}
+            </p>
           </div>
 
           <div>
@@ -176,7 +187,9 @@
           </div>
 
           <div>
-            <label for="receipt" class="mb-1.5 block text-sm font-semibold">{{ lang.t('checkout.receiptLabel') }}</label>
+            <label for="receipt" class="mb-1.5 block text-sm font-semibold">{{
+              lang.t('checkout.receiptLabel')
+            }}</label>
             <input
               id="receipt"
               type="file"

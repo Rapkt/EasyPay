@@ -62,7 +62,7 @@
     "exchangeRate": "Exchange rate",
     "amountEGP": "Amount in EGP",
     "serviceFee": "Service fee ({{fee}}%)",
-    "youPay": "You pay",
+    "youPay": "Required Payment",
     "continuebtn": "Continue to payment",
     "sendExactly": "Send exactly",
     "forService": "for {{service}} · ${{usd}}",

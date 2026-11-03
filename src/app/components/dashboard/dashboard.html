@@ -178,7 +178,7 @@
       </div>
     } @else {
       <div class="mt-4 overflow-hidden rounded-2xl border border-[#0F2A24]/10 bg-white shadow-sm">
-        <div class="overflow-x-auto">
+        <div class="hidden sm:block overflow-x-auto">
           <table class="w-full min-w-[760px] text-left text-sm">
             <thead class="bg-[#F4F7F5] text-xs uppercase tracking-wide text-[#0F2A24]/50">
               <tr>
@@ -255,6 +255,68 @@
               }
             </tbody>
           </table>
+        </div>
+        <div class="divide-y divide-[#0f2A23]/10 sm:hidden">
+          @for(t of sorted();track t.id){
+            <div class="flex items-center justify-between gap-3 p-4 transition hover:bg[#F4F7F5]/60">
+              <div class="flex items-center gap-3 min-w-0">
+                <span
+                class="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-[#0B6B5B]/10 text-xs font-bold text-[#0B6B5B]">
+                       {{t.service.slice(0,2).toUpperCase()}}
+                </span>
+                <div class="truncate">
+                  <p class="font-semibold text-sm truncate">{{t.service}}</p>
+                  <p class="text-xs text-[#0F2A24]/70">
+                    <span class="font-medium text-[#0F2A24]">${{t.usd | number: '1.2-2'}}</span>
+                  </p>
+                  <p class="text-[11px] text-[#0F2A23]/40">{{t.date | date:'shortDate'}}</p>
+                </div>
+              </div>
+
+              <div class="flex flex-col items-end gap-2 shrink-0">
+            <span
+              class="rounded-full px-2 py-0.5 text-[11px] font-semibold"
+              [class]="statusClass(t.status)"
+            >
+              {{ t.status }}
+            </span>
+
+                <div class="flex items-center gap-1.5">
+                  @if (t.status === 'Pending') {
+                    <button
+                      type="button"
+                      (click)="approve(t.id)"
+                      [disabled]="busy()"
+                      class="rounded-lg bg-[#0B6B5B] px-2.5 py-1 text-xs font-semibold text-white
+    		  transition hover:bg-[#095647] disabled:opacity-50"
+                    >
+                      {{ approvingId() === t.id ? '…' : lang.t('dashboard.approve') }}
+                    </button>
+                    <button
+                      type="button"
+                      (click)="confirmDeclineId.set(t.id)"
+                      [disabled]="busy()"
+                      class="rounded-lg border border-rose-300 px-2 py-1 text-xs font-semibold
+    		  text-rose-600 transition hover:bg-rose-50 disabled:opacity-50"
+                    >
+                      {{ lang.t('dashboard.decline') }}
+                    </button>
+                  } @else if (t.status === 'Completed' && t.card) {
+                    <button
+                      type="button"
+                      (click)="openCard(t.card)"
+                      class="rounded-lg bg-[#0B6B5B] px-2.5 py-1 text-xs font-semibold text-white
+    		  transition hover:bg-[#095647]"
+                    >
+                      {{ lang.t('dashboard.viewCard') }}
+                    </button>
+                  }
+                </div>
+              </div>
+
+            </div>
+
+          }
         </div>
       </div>
     }
