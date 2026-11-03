@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none" role="img" aria-label="Google Cloud logo">
+  <path
+    d="M62 148h76a39 39 0 0 0 3-78 53 53 0 0 0-101 11 35 35 0 0 0 22 67Z"
+    stroke="#fff"
+    stroke-width="10"
+    stroke-linejoin="round"
+  />
+  <path d="M100 92v40M84 112h32" stroke="#fff" stroke-width="9" stroke-linecap="round" />
+</svg>

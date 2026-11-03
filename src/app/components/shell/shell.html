@@ -1,0 +1,115 @@
+<div class="min-h-screen text-[#0F2A24]">
+  <header class="sticky top-0 z-30 border-b border-[#0F2A24]/10 bg-white/80 backdrop-blur">
+    <nav class="mx-auto flex items-center justify-between gap-3 px-4 py-3">
+      <a routerLink="/dashboard" class="flex shrink-0 items-center gap-2.5 text-lg font-bold">
+        <span
+          class="grid h-9 w-9 place-items-center rounded-xl bg-gradient-to-br from-[#0B6B5B] to-[#0F2A24] text-white shadow-sm"
+        >
+          <svg class="h-4 w-4" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+            <rect
+              x="2.5"
+              y="5"
+              width="15"
+              height="10"
+              rx="2.5"
+              stroke="currentColor"
+              stroke-width="1.6"
+            />
+            <path d="M2.5 8.5h15" stroke="currentColor" stroke-width="1.6" />
+          </svg>
+        </span>
+        <span>EasyPay</span>
+      </a>
+
+      <div class="relative flex shrink-0 items-center rounded-full bg-[#0F2A24]/5 p-1 text-sm font-medium">
+        <!-- Sliding background pill -->
+        <div
+          class="absolute bottom-1 left-1 top-1 w-[calc(50%-4px)] rounded-full bg-white shadow-sm ring-1 ring-black/5 transition-transform duration-200 ease-out"
+          [class.translate-x-0]="rlaDashboard.isActive"
+          [class.translate-x-full]="rlaCheckout.isActive"
+        ></div>
+
+        <!-- Nav links -->
+        <a
+          routerLink="/dashboard"
+          #rlaDashboard="routerLinkActive"
+          routerLinkActive
+          [routerLinkActiveOptions]="{ exact: true }"
+          class="relative z-10 flex-1 whitespace-nowrap rounded-full px-3 py-2 text-center transition-colors duration-300 active:scale-95 sm:px-4"
+          [class.text-[#0B6B5B]]="rlaDashboard.isActive"
+          [class.text-[#0F2A24]/60]="!rlaDashboard.isActive"
+        >
+        My requests
+        </a>
+
+        <a
+          routerLink="/checkout"
+          #rlaCheckout="routerLinkActive"
+          routerLinkActive
+          [routerLinkActiveOptions]="{ exact: true }"
+          class="relative z-10 flex-1 whitespace-nowrap rounded-full px-3 py-2 text-center transition-colors duration-300 active:scale-95 sm:px-4"
+          [class.text-[#0B6B5B]]="rlaCheckout.isActive"
+          [class.text-[#0F2A24]/60]="!rlaCheckout.isActive"
+        >
+        New payment
+        </a>
+      </div>
+
+      <div class="flex shrink-0 items-center gap-3">
+        <div class="hidden text-right sm:block">
+          <p class="text-[10px] uppercase tracking-wide text-[#0F2A24]/40">Signed in as</p>
+          <p class="text-sm font-semibold leading-tight">EasyPay User</p>
+        </div>
+        <span
+          class="grid h-9 w-9 place-items-center rounded-full bg-gradient-to-br from-amber-300 to-amber-500 text-sm font-bold text-[#7C4A03] shadow-sm"
+        >
+          E
+        </span>
+      </div>
+    </nav>
+  </header>
+
+  <main class="page-content mx-auto max-w-6xl px-4 py-6 sm:py-8">
+    <router-outlet />
+  </main>
+
+  <footer class="mx-auto max-w-6xl px-4 pb-8 pt-2 text-center text-xs text-[#0F2A24]/40">
+    EasyPay demo · Pay USD bills with EGP
+  </footer>
+
+  <div
+    class="fixed bottom-4 right-4 z-50 flex w-[calc(100%-2rem)] max-w-sm flex-col gap-2"
+    aria-live="polite"
+  >
+    @for (t of toast.toasts(); track t.id) {
+      <div
+        class="toast flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium text-white shadow-lg"
+        [class]="t.type === 'success' ? 'bg-[#0B6B5B]' : 'bg-rose-600'"
+      >
+        <span class="grid h-6 w-6 shrink-0 place-items-center rounded-full bg-white/20">
+          @if (t.type === 'success') {
+            <svg class="h-3.5 w-3.5" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+              <path
+                d="M5 10l3 3 7-7"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          } @else {
+            <svg class="h-3.5 w-3.5" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+              <path
+                d="M6 6l8 8M14 6l-8 8"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+              />
+            </svg>
+          }
+        </span>
+        <span class="flex-1">{{ t.message }}</span>
+      </div>
+    }
+  </div>
+</div>

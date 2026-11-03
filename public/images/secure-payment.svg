@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 160" fill="none" role="img" aria-label="Secure payment illustration">
+  <defs>
+    <linearGradient id="spShield" x1="70" y1="20" x2="140" y2="140" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0B6B5B"/>
+      <stop offset="1" stop-color="#0F2A24"/>
+    </linearGradient>
+    <linearGradient id="spGold" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#FDE68A"/>
+      <stop offset="1" stop-color="#F59E0B"/>
+    </linearGradient>
+  </defs>
+  <circle cx="100" cy="80" r="70" fill="#0B6B5B" fill-opacity="0.08"/>
+  <path d="M100 22l48 18v34c0 30-20 52-48 64-28-12-48-34-48-64V40l48-18Z" fill="url(#spShield)"/>
+  <rect x="82" y="76" width="36" height="30" rx="6" fill="#fff" fill-opacity="0.92"/>
+  <path d="M90 76v-8a10 10 0 0 1 20 0v8" stroke="#fff" stroke-width="5" stroke-linecap="round"/>
+  <circle cx="100" cy="90" r="3.5" fill="#0F2A24"/>
+  <path d="M100 92v6" stroke="#0F2A24" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="160" cy="44" r="16" fill="url(#spGold)"/>
+  <text x="160" y="50" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="700" fill="#7C4A03">$</text>
+  <path d="M46 116l4 9 9 4-9 4-4 9-4-9-9-4 9-4 4-9Z" fill="#F59E0B" fill-opacity="0.75"/>
+</svg>
