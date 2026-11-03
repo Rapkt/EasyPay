@@ -1,0 +1,267 @@
+<div class="mx-auto max-w-5xl space-y-6">
+  <section
+    class="relative overflow-hidden rounded-3xl border border-[#0F2A24]/10 bg-gradient-to-br from-white via-white to-[#E7F3EF] shadow-sm"
+  >
+    <div
+      class="pointer-events-none absolute -right-20 -top-24 h-64 w-64 rounded-full bg-[#F59E0B]/10 blur-2xl"
+    ></div>
+    <div class="relative grid items-center gap-6 p-6 sm:grid-cols-[1.3fr_1fr] sm:p-8">
+      <div>
+        <span
+          class="inline-flex items-center gap-2 rounded-full bg-[#0B6B5B]/10 px-3 py-1 text-xs font-semibold text-[#0B6B5B]"
+        >
+          <span class="h-1.5 w-1.5 rounded-full bg-[#0B6B5B]"></span>
+          New payment
+        </span>
+        <h1 class="mt-3 text-3xl font-bold tracking-tight sm:text-4xl">Pay a USD bill with EGP</h1>
+        <p class="mt-2 max-w-md text-sm text-[#0F2A24]/70">
+          Tell us what you need to pay. You send EGP through InstaPay, we issue a virtual USD card.
+        </p>
+        <div class="mt-5 flex flex-wrap gap-2 text-xs font-medium">
+          <span class="rounded-full bg-white px-3 py-1.5 text-[#0F2A24]/60 shadow-sm"
+            >1 USD = {{ tx.rate }} EGP</span
+          >
+          <span class="rounded-full bg-white px-3 py-1.5 text-[#0F2A24]/60 shadow-sm"
+            >Fee {{ tx.feePercent }}%</span
+          >
+          <span class="rounded-full bg-white px-3 py-1.5 text-[#0F2A24]/60 shadow-sm"
+            >Card in minutes</span
+          >
+        </div>
+      </div>
+      <img
+        src="images/payment-hero.svg"
+        alt="Secure mobile payment"
+        class="mx-auto w-full max-w-xs"
+      />
+    </div>
+  </section>
+
+  <div class="grid items-start gap-6 lg:grid-cols-[minmax(0,1.6fr)_minmax(0,1fr)]">
+    <div class="rounded-3xl border border-[#0F2A24]/10 bg-white p-6 shadow-sm sm:p-8">
+      <ol class="mb-6 grid grid-cols-2 gap-2 text-xs font-semibold">
+        <li
+          class="flex items-center gap-2 rounded-xl px-3 py-2 transition"
+          [class]="step() === 'form' ? 'bg-[#0B6B5B] text-white' : 'bg-[#0B6B5B]/10 text-[#0B6B5B]'"
+        >
+          <span
+            class="grid h-5 w-5 place-items-center rounded-full"
+            [class]="step() === 'form' ? 'bg-white/20' : 'bg-[#0B6B5B] text-white'"
+          >
+            @if (step() === 'pay') {
+              <svg class="h-3 w-3" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                <path
+                  d="M5 10l3 3 7-7"
+                  stroke="currentColor"
+                  stroke-width="2.4"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            } @else {
+              1
+            }
+          </span>
+          Payment details
+        </li>
+        <li
+          class="flex items-center gap-2 rounded-xl px-3 py-2 transition"
+          [class]="
+            step() === 'pay' ? 'bg-[#0B6B5B] text-white' : 'bg-[#0F2A24]/5 text-[#0F2A24]/50'
+          "
+        >
+          <span
+            class="grid h-5 w-5 place-items-center rounded-full"
+            [class]="step() === 'pay' ? 'bg-white/20' : 'bg-white'"
+            >2</span
+          >
+          Send &amp; upload
+        </li>
+      </ol>
+
+      @if (step() === 'form') {
+        <form [formGroup]="form" (ngSubmit)="next()" class="space-y-5">
+          <div>
+            <label for="service" class="mb-1.5 block text-sm font-semibold">Service</label>
+            <select
+              id="service"
+              formControlName="service"
+              class="w-full rounded-xl border border-[#0F2A24]/15 bg-white px-3.5 py-3 text-sm transition focus:border-[#0B6B5B] focus:outline-none focus:ring-2 focus:ring-[#0B6B5B]/25"
+            >
+              <option value="" disabled>Choose a service</option>
+              @for (s of tx.services; track s) {
+                <option [value]="s">{{ s }}</option>
+              }
+            </select>
+            @if (showError('service')) {
+              <p class="mt-1.5 text-xs font-medium text-rose-600">
+                Choose the service you are paying for.
+              </p>
+            }
+          </div>
+
+          <div>
+            <label for="amount" class="mb-1.5 block text-sm font-semibold">Amount (USD)</label>
+            <div class="relative">
+              <span
+                class="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-sm font-semibold text-[#0F2A24]/40"
+                >$</span
+              >
+              <input
+                id="amount"
+                type="number"
+                formControlName="amount"
+                placeholder="e.g. 50"
+                class="w-full rounded-xl border border-[#0F2A24]/15 py-3 pl-8 pr-3.5 text-sm transition focus:border-[#0B6B5B] focus:outline-none focus:ring-2 focus:ring-[#0B6B5B]/25"
+              />
+            </div>
+            @if (showError('amount')) {
+              <p class="mt-1.5 text-xs font-medium text-rose-600">
+                Enter an amount between $5 and $1,000.
+              </p>
+            }
+          </div>
+
+          <dl class="space-y-2.5 rounded-2xl bg-[#F4F7F5] p-4 text-sm">
+            <div class="flex justify-between">
+              <dt class="text-[#0F2A24]/60">Exchange rate</dt>
+              <dd class="font-medium">1 USD = {{ tx.rate }} EGP</dd>
+            </div>
+            <div class="flex justify-between">
+              <dt class="text-[#0F2A24]/60">Amount in EGP</dt>
+              <dd class="font-medium">{{ quote().base | number: '1.0-0' }} EGP</dd>
+            </div>
+            <div class="flex justify-between">
+              <dt class="text-[#0F2A24]/60">Service fee ({{ tx.feePercent }}%)</dt>
+              <dd class="font-medium">{{ quote().fee | number: '1.0-0' }} EGP</dd>
+            </div>
+            <div
+              class="flex justify-between border-t border-[#0F2A24]/10 pt-2.5 text-base font-bold"
+            >
+              <dt>You pay</dt>
+              <dd>{{ quote().total | number: '1.0-0' }} EGP</dd>
+            </div>
+          </dl>
+
+          <button
+            type="submit"
+            class="w-full rounded-xl bg-[#0B6B5B] py-3 font-semibold text-white shadow-sm transition hover:bg-[#095647] hover:shadow-md"
+          >
+            Continue to payment
+          </button>
+        </form>
+      } @else {
+        <div class="space-y-5">
+          <div class="rounded-2xl bg-[#F4F7F5] p-4 text-sm">
+            <p class="text-[#0F2A24]/60">Send exactly</p>
+            <p class="text-2xl font-bold">{{ quote().total | number: '1.0-0' }} EGP</p>
+            <p class="mt-1 text-[#0F2A24]/60">for {{ form.value.service }} · ${{ usd() }}</p>
+          </div>
+
+          <div>
+            <p class="mb-1.5 text-sm font-semibold">InstaPay address</p>
+            <div class="flex items-center gap-2">
+              <code
+                class="flex-1 rounded-xl border border-[#0F2A24]/15 bg-gray-50 px-3.5 py-3 text-sm"
+                >{{ tx.instapayAddress }}</code
+              >
+              <button
+                type="button"
+                (click)="copyAddress()"
+                class="rounded-xl border border-[#0F2A24]/20 px-3.5 py-3 text-sm font-medium transition hover:bg-gray-50"
+              >
+                {{ copied() ? 'Copied' : 'Copy' }}
+              </button>
+            </div>
+          </div>
+
+          <div>
+            <label for="receipt" class="mb-1.5 block text-sm font-semibold">Payment receipt</label>
+            <input
+              id="receipt"
+              type="file"
+              accept="image/*,.pdf"
+              (change)="onFile($event)"
+              class="block w-full text-sm file:mr-3 file:rounded-lg file:border-0 file:bg-[#0B6B5B]/10 file:px-4 file:py-2 file:font-medium file:text-[#0B6B5B] hover:file:bg-[#0B6B5B]/20"
+            />
+            @if (fileError()) {
+              <p class="mt-1.5 text-xs font-medium text-rose-600">{{ fileError() }}</p>
+            }
+            @if (previewUrl()) {
+              <img
+                [src]="previewUrl()"
+                alt="Receipt preview"
+                class="mt-3 max-h-48 rounded-xl border border-[#0F2A24]/10"
+              />
+            } @else if (fileName()) {
+              <p class="mt-2 text-sm text-[#0F2A24]/70">{{ fileName() }}</p>
+            }
+          </div>
+
+          <div class="flex gap-2">
+            <button
+              type="button"
+              (click)="step.set('form')"
+              [disabled]="loading()"
+              class="rounded-xl border border-[#0F2A24]/20 px-4 py-3 font-medium transition hover:bg-gray-50 disabled:opacity-50"
+            >
+              Back
+            </button>
+            <button
+              type="button"
+              (click)="submit()"
+              [disabled]="loading()"
+              class="flex flex-1 items-center justify-center gap-2 rounded-xl bg-[#0B6B5B] py-3 font-semibold text-white transition hover:bg-[#095647] disabled:opacity-70"
+            >
+              @if (loading()) {
+                <span
+                  class="h-4 w-4 animate-spin rounded-full border-2 border-white/40 border-t-white"
+                ></span>
+                Submitting…
+              } @else {
+                Submit receipt
+              }
+            </button>
+          </div>
+        </div>
+      }
+    </div>
+
+    <aside class="space-y-4">
+      <div class="overflow-hidden rounded-3xl border border-[#0F2A24]/10 bg-white p-5 shadow-sm">
+        <img src="images/secure-payment.svg" alt="Secure payment" class="mx-auto w-40" />
+        <h2 class="mt-2 text-center text-base font-bold">Safe and simple</h2>
+        <p class="mt-1 text-center text-xs text-[#0F2A24]/60">
+          Your receipt is reviewed before a virtual card is issued.
+        </p>
+      </div>
+
+      <div class="rounded-3xl border border-[#0F2A24]/10 bg-white p-5 shadow-sm">
+        <h2 class="text-sm font-bold">How it works</h2>
+        <ol class="mt-3 space-y-3 text-sm">
+          <li class="flex gap-3">
+            <span
+              class="grid h-6 w-6 shrink-0 place-items-center rounded-full bg-[#0B6B5B]/10 text-xs font-bold text-[#0B6B5B]"
+              >1</span
+            >
+            <span class="text-[#0F2A24]/70">Choose the service and enter the USD amount.</span>
+          </li>
+          <li class="flex gap-3">
+            <span
+              class="grid h-6 w-6 shrink-0 place-items-center rounded-full bg-[#0B6B5B]/10 text-xs font-bold text-[#0B6B5B]"
+              >2</span
+            >
+            <span class="text-[#0F2A24]/70">Send the EGP total to our InstaPay address.</span>
+          </li>
+          <li class="flex gap-3">
+            <span
+              class="grid h-6 w-6 shrink-0 place-items-center rounded-full bg-[#0B6B5B]/10 text-xs font-bold text-[#0B6B5B]"
+              >3</span
+            >
+            <span class="text-[#0F2A24]/70">Upload the receipt and get your virtual card.</span>
+          </li>
+        </ol>
+      </div>
+    </aside>
+  </div>
+</div>
