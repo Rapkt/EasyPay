@@ -6,7 +6,6 @@ import { Router } from '@angular/router';
 import { TransactionService } from '../../services/transaction.service';
 import { ToastService } from '../../services/toast.service';
 import { LanguageService } from '../../services/language.service';
-
 @Component({
   imports: [ReactiveFormsModule, DecimalPipe],
   selector: 'app-checkout',
@@ -19,7 +18,6 @@ export class CheckoutComponent {
   private router = inject(Router);
   private fb = inject(FormBuilder);
   lang = inject(LanguageService);
-
   step = signal<'form' | 'pay'>('form');
   loading = signal(false);
   copied = signal(false);
@@ -36,6 +34,58 @@ export class CheckoutComponent {
     ]),
   });
 
+  preventNegative(event: KeyboardEvent) {
+    const allowedKeys = [
+      'Backspace', 'Tab', 'Delete', 'ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'Enter'
+    ];
+
+    if (event.ctrlKey || event.metaKey || allowedKeys.includes(event.key)) {
+      return;
+    }
+
+    const input = event.target as HTMLInputElement;
+    const key = event.key;
+    const start = input.selectionStart ?? 0;
+    const end = input.selectionEnd ?? 0;
+    const current = input.value;
+
+    if (!/^[0-9]$/.test(key)) {
+      event.preventDefault();
+      return;
+    }
+
+    if (key === '.' && current.includes('.')) {
+      event.preventDefault();
+      return;
+    }
+
+    const nextValueString = current.slice(0, start) + key + current.slice(end);
+    const nextValue = Number(nextValueString);
+
+    if (!isNaN(nextValue) && nextValue > 1000) {
+      event.preventDefault();
+    }
+  }
+
+  preventNegativePaste(event: ClipboardEvent) {
+    const pasteData = event.clipboardData?.getData('text') ?? '';
+    const input = event.target as HTMLInputElement;
+    const start = input.selectionStart ?? 0;
+    const end = input.selectionEnd ?? 0;
+
+    if (!/^\d+(\.\d+)?$/.test(pasteData.trim())) {
+      event.preventDefault();
+      return;
+    }
+
+    const nextValueString = input.value.slice(0, start) + pasteData.trim() +
+      input.value.slice(end);
+    const nextValue = Number(nextValueString);
+
+    if (isNaN(nextValue) || nextValue < 0 || nextValue > 1000) {
+      event.preventDefault();
+    }
+  }
   private value = toSignal(this.form.valueChanges, {
     initialValue: this.form.getRawValue(),
   });
@@ -44,7 +94,10 @@ export class CheckoutComponent {
   });
   usd = computed(() => Number(this.value().amount) || 0);
   quote = computed(() => this.tx.quote(this.usd()));
-  invalid = computed(() => this.status() === 'INVALID');
+  invalid = computed(() => {
+    this.value();
+    return this.form.invalid;
+  });
 
   showError(name: 'service' | 'amount') {
     const c = this.form.controls[name];

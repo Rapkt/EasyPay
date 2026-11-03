@@ -1,6 +1,6 @@
 <div class="min-h-screen text-[#0F2A24]">
-  <header class="sticky hidden sm:flex top-0 z-30 border-b border-[#0F2A24]/10 bg-white/80 backdrop-blur">
-    <nav class="mx-auto flex items-center justify-between gap-3 px-4 py-3">
+  <header class="sticky top-0 z-30 border-b border-[#0F2A24]/10 bg-white/80 backdrop-blur">
+    <nav class="mx-auto flex  w-full items-center justify-between gap-3 px-4 py-3">
       <a routerLink="/dashboard" class="flex shrink-0 items-center gap-2.5 text-lg font-bold">
         <span
           class="grid h-9 w-9 place-items-center rounded-xl bg-gradient-to-br from-[#0B6B5B] to-[#0F2A24] text-white shadow-sm"
@@ -67,29 +67,6 @@
       </div>
     </nav>
   </header>
-<header class="sm:hidden">
-  <nav class="mx-auto flex items-center justify-center gap-3 pt-2 ">
-    <a routerLink="/dashboard" class="flex shrink-0 items-center gap-2.5 text-lg font-bold">
-        <span
-          class="grid h-9 w-9 place-items-center rounded-xl bg-gradient-to-br from-[#0B6B5B] to-[#0F2A24] text-white shadow-sm"
-        >
-          <svg class="h-4 w-4" viewBox="0 0 20 20" fill="none" aria-hidden="true">
-            <rect
-              x="2.5"
-              y="5"
-              width="15"
-              height="10"
-              rx="2.5"
-              stroke="currentColor"
-              stroke-width="1.6"
-            />
-            <path d="M2.5 8.5h15" stroke="currentColor" stroke-width="1.6" />
-          </svg>
-        </span>
-      <span>EasyPay</span>
-    </a>
-  </nav>
-</header>
   <main class="page-content mx-auto max-w-6xl px-4 py-6 pb-20 sm:py-8 sm:pb-8">
     <router-outlet />
   </main>
