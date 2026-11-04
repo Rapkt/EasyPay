@@ -8,6 +8,9 @@ html {
     cursor: pointer;
   }
 }
+body:has(.modal-backdrop) {
+  overflow: hidden;
+}
 body {
   min-height: 100vh;
   font-family:
@@ -36,7 +39,7 @@ body {
   background: rgba(11, 107, 91, 0.18);
 }
 
-.page-content {
+.page-content:not(:has(.modal-backdrop)) {
   view-transition-name: page-content;
 }
 

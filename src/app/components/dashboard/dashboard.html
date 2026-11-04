@@ -325,7 +325,7 @@
 
 @if (confirmDeclineId(); as id) {
   <div
-    class="fixed inset-0 z-40 grid place-items-center bg-black/50 p-4 backdrop-blur-sm"
+    class="modal-backdrop fixed inset-0 z-50 grid place-items-center bg-black/50 p-4 backdrop-blur-sm"
     (click)="confirmDeclineId.set(null)"
     role="dialog"
     aria-modal="true"
@@ -374,7 +374,7 @@
 
 @if (selectedCard(); as card) {
   <div
-    class="modal-backdrop fixed inset-0 z-40 grid place-items-center bg-black/50 p-4 backdrop-blur-sm"
+    class="modal-backdrop fixed inset-0 z-50 grid place-items-center bg-black/50 p-4 backdrop-blur-sm"
     [class.modal-leave]="cardClosing()"
     (click)="closeCard()"
     role="dialog"
