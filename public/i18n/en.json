@@ -3,6 +3,10 @@
     "myRequests": "My requests",
     "newPayment": "New payment",
     "signedInAs": "Signed in as",
+    "userProfile": "User profile",
+    "signOut": "Sign out",
+    "signedOutNotice": "Signed out successfully (demo)",
+    "profileNotice": "User profile view is a placeholder in this demo",
     "footer": "EasyPay demo · Pay USD bills with EGP"
   },
   "dashboard": {

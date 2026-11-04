@@ -180,7 +180,7 @@
       <div class="mt-4 overflow-hidden rounded-2xl border border-[#0F2A24]/10 bg-white shadow-sm">
         <div class="hidden sm:block overflow-x-auto">
           <table class="w-full min-w-[760px] text-left text-sm">
-            <thead class="bg-[#F4F7F5] text-xs uppercase tracking-wide text-[#0F2A24]/50">
+            <thead class="bg-[#F4F7F5] border-b border-[#0F2A24]/10 text-xs uppercase tracking-wide text-[#0F2A24]">
               <tr>
                 <th class="px-5 py-3 font-semibold">{{lang.t('dashboard.service')}}</th>
                 <th class="px-5 py-3 font-semibold">{{lang.t('dashboard.USD')}}</th>
@@ -202,7 +202,7 @@
                       </span>
                       <div>
                         <p class="font-semibold">{{ t.service }}</p>
-                        <p class="text-xs text-[#0F2A24]/50">{{ t.id }}</p>
+                        <p class="text-xs text-[#0F2A24]">{{ t.id }}</p>
                       </div>
                     </div>
                   </td>
@@ -269,7 +269,7 @@
                   <p class="text-xs text-[#0F2A24]/70">
                     <span class="font-medium text-[#0F2A24]">${{t.usd | number: '1.2-2'}}</span>
                   </p>
-                  <p class="text-[11px] text-[#0F2A23]/40">{{t.date | date:'shortDate'}}</p>
+                  <p class="text-[11px] text-[#0F2A23]/80">{{t.date | date:'shortDate'}}</p>
                 </div>
               </div>
 
