@@ -28,7 +28,10 @@ body {
   background-attachment: fixed;
   -webkit-font-smoothing: antialiased;
 }
-
+::view-transition-group(bottom-nav),
+::view-transition-group(top-nav){
+  z-index: 9999;
+}
 ::selection {
   background: rgba(11, 107, 91, 0.18);
 }

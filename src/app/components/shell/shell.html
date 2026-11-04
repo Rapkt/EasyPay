@@ -1,5 +1,6 @@
 <div class="min-h-screen text-[#0F2A24]">
-  <header class="sticky top-0 z-30 border-b border-[#0F2A24]/10 bg-white/80 backdrop-blur">
+  <header style="view-transition-name: top-nav"
+    class="sticky top-0 z-30 border-b border-[#0F2A24]/10 bg-white/80 backdrop-blur">
     <nav class="mx-auto flex  w-full items-center justify-between gap-3 px-4 py-3">
       <a routerLink="/dashboard" class="flex shrink-0 items-center gap-2.5 text-lg font-bold">
         <span
@@ -22,14 +23,12 @@
       </a>
 
       <div class="relative hidden sm:flex  shrink-0 items-center rounded-full bg-[#0F2A24]/5 p-1 text-sm font-medium">
-        <!-- Sliding background pill -->
         <div
           class="absolute bottom-1 left-1 top-1 w-[calc(50%-4px)] rounded-full bg-white shadow-sm ring-1 ring-black/5 transition-transform duration-200 ease-out"
           [class.translate-x-0]="rlaDashboard.isActive"
           [class.translate-x-full]="rlaCheckout.isActive"
         ></div>
 
-        <!-- Nav links -->
         <a
           routerLink="/dashboard"
           #rlaDashboard="routerLinkActive"
@@ -74,15 +73,20 @@
   <footer class="mx-auto max-w-6xl px-4 pb-8 pt-2 text-center text-xs text-[#0F2A24]/40">
     {{ lang.t('shell.footer') }}
   </footer>
-  <nav class="fixed bottom-0 left-0 right-0 z-30 flex items-center justify-around border-t
-    border-[#0F2A24]/10 bg-white/90 px-4 py-2 backdrop-blur sm:hidden">
+  <nav
+    class="fixed bottom-5 inset-x-4 z-40 mx-auto flex max-w-sm items-center justify-around
+      rounded-full border border-white/40 bg-white/65 px-4 py-2
+      shadow-[0_8px_32px_0_rgba(15,42,36,0.12)] backdrop-blur-2xl backdrop-saturate-150 ring-1
+      ring-black/5 sm:hidden"
+    style="view-transition-name: bottom-nav"
+  >
     <a
       routerLink="/dashboard"
-      routerLinkActive="text-[#0B6B5B] font-semibold"
+      routerLinkActive="!text-[#0B6B5B] !bg-[#0B6B5B]/10 font-semibold"
       [routerLinkActiveOptions]="{ exact: true }"
-      class="flex flex-col items-center gap-1 text-xs text-[#0F2A24]/60 transition"
+      class="flex flex-1 flex-col items-center gap-1 rounded-full py-1.5 text-xs font-medium
+        text-[#0F2A24]/60 transition-all duration-300 active:scale-95"
     >
-      <!-- Dashboard / Requests Icon -->
       <svg class="h-5 w-5" viewBox="0 0 20 20" fill="none" stroke="currentColor"
            stroke-width="1.8">
         <path d="M5 3h10a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1Z" />
@@ -91,13 +95,15 @@
       <span>{{ lang.t('shell.myRequests') }}</span>
     </a>
 
+    <span class="h-4 w-px bg-[#0F2A24]/10"></span>
+
     <a
       routerLink="/checkout"
-      routerLinkActive="text-[#0B6B5B] font-semibold"
+      routerLinkActive="!text-[#0B6B5B] !bg-[#0B6B5B]/10 font-semibold"
       [routerLinkActiveOptions]="{ exact: true }"
-      class="flex flex-col items-center gap-1 text-xs text-[#0F2A24]/60 transition"
+      class="flex flex-1 flex-col items-center gap-1 rounded-full py-1.5 text-xs font-medium
+        text-[#0F2A24]/60 transition-all duration-300 active:scale-95"
     >
-      <!-- Checkout / Plus Icon -->
       <svg class="h-5 w-5" viewBox="0 0 20 20" fill="none" stroke="currentColor"
            stroke-width="1.8">
         <circle cx="10" cy="10" r="7" />
