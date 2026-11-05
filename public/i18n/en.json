@@ -1,7 +1,7 @@
 {
   "shell": {
     "myRequests": "My requests",
-    "newPayment": "New payment",
+    "newPayment": "New card",
     "signedInAs": "Signed in as",
     "userProfile": "User profile",
     "signOut": "Sign out",
@@ -13,7 +13,7 @@
     "title": "Account overview",
     "header": "My requests",
     "summary": "Track every USD bill you paid with EGP and grab your virtual card as soon as it is approved.",
-    "paymentbtn": "New Payment",
+    "paymentbtn": "New Card",
     "pending": "pending review",
     "totalrequests": "Total requests",
     "waiting": "Waiting for approval",

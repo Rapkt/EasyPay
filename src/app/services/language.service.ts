@@ -26,7 +26,6 @@ export class LanguageService {
         value
       );
     }
-    console.log(value);
     return value;
   }
 

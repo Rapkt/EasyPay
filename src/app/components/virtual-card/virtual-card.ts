@@ -64,7 +64,6 @@ export class VirtualCardComponent {
       this.copied.set(true);
       setTimeout(() => this.copied.set(false), 1500);
     } catch {
-      /* clipboard unavailable: ignore in demo */
     }
   }
 }
